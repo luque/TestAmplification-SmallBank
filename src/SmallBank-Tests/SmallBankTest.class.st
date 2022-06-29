@@ -24,6 +24,27 @@ SmallBankTest >> testAmplified_0_1 [
 	self assert: b balance equals: 0
 ]
 
+{ #category : #'as yet unclassified' }
+SmallBankTest >> testAmplified_0_2 [
+
+	"SmallAmp has derived this test from `SmallBankTest>>#testInit` by regenerating its assertions.
+	This test can:
+nil	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `SmallBank>> #rand`:
+		original code snippet: `(1 to: 1000) atRandom`
+		Mutated code snippet: `^ (1 to: 1000) yourself`
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Remove ^) in `SmallBank>> #rand`:
+		original code snippet: `^ (1 to: 1000) atRandom`
+		Mutated code snippet: `(1 to: 1000) atRandom`
+		Dynamic state: nil
+"
+
+	<madeBySmallAmp: 'Amplified_0_2'>
+	| b |
+	b := SmallBank new.
+	self assert: b rand class equals: SmallInteger
+]
+
 { #category : #tests }
 SmallBankTest >> testDeposit [
 
