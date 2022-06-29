@@ -12,6 +12,7 @@ env:
   SmallAmp_ShredSeed: ${{ github.run_id}}
   SMALLAMP_DashboardJson: 1
   COMMIT_EMAIL: rafael.luque@osoco.es
+  PULL_REQUEST_PREFIX: [Test Amplification]
 
 on:
   workflow_dispatch:
