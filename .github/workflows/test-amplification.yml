@@ -1,8 +1,8 @@
-name: TestAmplification
+name: Test Amplification
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   reponame: ${{github.event.repository.name}}
-  project_baseline: SmallBank
+  project_baseline: Bank
   project_directory: src
   iteration: 3
   SMALLAMP_NOPUSH: PUSH
@@ -18,7 +18,7 @@ on:
       testClasses:
         description: 'TestClasses to amplify (comma separated) empty-> all'
         required: false
-        default: 'SmallBankTest'
+        default: 'BankTest'
       mode:
         description: 'mode (dspot, dspotFast, dspotFastRank)'
         required: true
