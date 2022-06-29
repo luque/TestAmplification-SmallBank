@@ -4,6 +4,59 @@ Class {
 	#category : #'Bank-Tests'
 }
 
+{ #category : #'as yet unclassified' }
+BankTest >> testAmplified_0_2 [
+
+	"SmallAmp has derived this test from `BankTest>>#testWithdraw` by applying some transformations and regenerating its assertions.
+	This test can:
+	* It detects the injection of an artificial fault (Replace #ifFalse: with #ifTrue:) in `Bank>> #withdraw:`:
+		original code snippet: `balance >= anAmount ifFalse: [ Error new signal ]`
+		Mutated code snippet: `balance >= anAmount ifTrue: [ Error new signal ]`
+		Dynamic state: {#balance->0. #anAmount->30}
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `Bank>> #withdraw:`:
+		original code snippet: `balance >= anAmount ifFalse: [ Error new signal ]`
+		Mutated code snippet: `MuTalkInfiniteRecursionError onCount: 1024.
+
+balance >= anAmount ifTrue: [ 
+	balance := balance - anAmount.
+	^ true ].
+(balance >= anAmount) yourself`
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Chnage a message send with #yourself) in `Bank>> #withdraw:`:
+		original code snippet: `Error new signal`
+		Mutated code snippet: `Error new yourself`
+		Dynamic state: nil
+	* It detects the injection of an artificial fault (Replace #ifTrue: receiver with true) in `Bank>> #withdraw:`:
+		original code snippet: `balance >= anAmount ifTrue: [ 
+	balance := balance - anAmount.
+	^ true ]`
+		Mutated code snippet: `true ifTrue: [ 
+	balance := balance - anAmount.
+	^ true ]`
+		Dynamic state: {#balance->0. #anAmount->30}
+	* It detects the injection of an artificial fault (Replace #ifFalse: receiver with true) in `Bank>> #withdraw:`:
+		original code snippet: `balance >= anAmount ifFalse: [ Error new signal ]`
+		Mutated code snippet: `true ifFalse: [ Error new signal ]`
+		Dynamic state: {#balance->0. #anAmount->30}
+	* It detects the injection of an artificial fault (Nullify the arguments of message sends) in `Bank>> #withdraw:`:
+		original code snippet: `balance >= anAmount ifFalse: [ Error new signal ]`
+		Mutated code snippet: `MuTalkInfiniteRecursionError onCount: 1024.
+
+balance >= anAmount ifTrue: [ 
+	balance := balance - anAmount.
+	^ true ].
+balance >= anAmount ifFalse: nil`
+		Dynamic state: nil
+"
+
+	<madeBySmallAmp: 'Amplified_0_2'>
+	| bank result aBoolean |
+	bank := Bank new.
+	aBoolean := bank deposit: 0.
+	self assert: aBoolean.
+	self should: [ result := bank withdraw: 30 ] raise: Error
+]
+
 { #category : #tests }
 BankTest >> testDeposit [
 
