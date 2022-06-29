@@ -1,0 +1,16 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'SmallBank',
+      #directory : '../src',
+      #platforms : [  #pharo ]
+    }
+  ],
+  #testing : {
+    #packages: [ 'SmallBank*' ],
+    #coverage: {
+      #packages: [ 'SmallBank' ],
+      #format: #lcov
+    }
+  }
+}
