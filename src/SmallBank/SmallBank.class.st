@@ -15,8 +15,8 @@ SmallBank >> balance [
 { #category : #operations }
 SmallBank >> deposit: anAmount [
 
-	(anAmount >= 0) ifTrue: [ balance := balance + anAmount ].
-		(anAmount >= 0) ifFalse: [ Error new signal ]
+	anAmount >= 0 ifTrue: [ balance := balance + anAmount. ^ true ].
+	anAmount >= 0 ifFalse: [ Error new signal ].
 ]
 
 { #category : #initialization }
@@ -27,8 +27,6 @@ balance := 0
 { #category : #operations }
 SmallBank >> withdraw: anAmount [
 
-	balance >= anAmount
-		ifTrue: [ balance := balance - anAmount ].
-		balance >= anAmount 
-		ifFalse: [ Error new signal ]
+	balance >= anAmount ifTrue: [ balance := balance - anAmount. ^ true ].
+	balance >= anAmount ifFalse: [ Error new signal ]
 ]

@@ -7,11 +7,11 @@ Class {
 { #category : #tests }
 SmallBankTest >> testDeposit [
 
-	| bank |
+	| bank result |
 	bank := SmallBank new.
 	self assert: bank balance equals: 0.
-	bank deposit: 100.
-	self assert: bank balance equals: 100.
+	result := bank deposit: 100.
+	self assert: bank balance equals: 100.self assert: result
 ]
 
 { #category : #tests }
@@ -25,11 +25,12 @@ SmallBankTest >> testInitialBalance [
 { #category : #tests }
 SmallBankTest >> testWithdraw [
 
-	| bank |
+	| bank result |
 	bank := SmallBank new.
 	self assert: bank balance equals: 0.
 	bank deposit: 100.
 	self assert: bank balance equals: 100.
-	bank withdraw: 30.
-	self assert: bank balance equals: 70
+	result := bank withdraw: 30.
+	self assert: bank balance equals: 70.
+	self assert: result.
 ]
