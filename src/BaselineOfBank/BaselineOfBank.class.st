@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfSmallBank,
+	#name : #BaselineOfBank,
 	#superclass : #BaselineOf,
 	#category : #BaselineOfBank
 }
 
 { #category : #baselines }
-BaselineOfSmallBank >> baseline: spec [
+BaselineOfBank >> baseline: spec [
 
 	<baseline>
 	spec for: #common do: [ 
