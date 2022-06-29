@@ -11,6 +11,7 @@ env:
   SMALLAMP_freezeTimeOut: 120
   SmallAmp_ShredSeed: ${{ github.run_id}}
   SMALLAMP_DashboardJson: 1
+  COMMIT_EMAIL: rafael.luque@osoco.es
 
 on:
   workflow_dispatch:
@@ -81,10 +82,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
            fetch-depth: 0
-      - uses: mabdi/smallamp-action@main
+      - uses: luque/smallamp-action@main
         with:
           action: setup
-      - uses: mabdi/smallamp-action@main
+      - uses: luque/smallamp-action@main
         with:
           action: amplify
         env:
@@ -104,14 +105,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
            fetch-depth: 0
-      - uses: mabdi/smallamp-action@main
+      - uses: luque/smallamp-action@main
         with:
           action: setup
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
           path: ${{ env.PHARO_HOME }}
-      - uses: mabdi/smallamp-action@main
+      - uses: luque/smallamp-action@main
         with:
           action: push
           github-token: ${{secrets.GITHUB_TOKEN}}
