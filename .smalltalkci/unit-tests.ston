@@ -7,9 +7,9 @@ SmalltalkCISpec {
     }
   ],
   #testing : {
-    #packages: [ 'SmallBank*' ],
+    #packages: [ 'Bank*' ],
     #coverage: {
-      #packages: [ 'SmallBank' ],
+      #packages: [ 'Bank' ],
       #format: #lcov
     }
   }
