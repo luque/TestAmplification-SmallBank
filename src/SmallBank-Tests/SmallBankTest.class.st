@@ -25,12 +25,11 @@ SmallBankTest >> testInitialBalance [
 { #category : #tests }
 SmallBankTest >> testWithdraw [
 
-	| bank result |
+	| bank |
 	bank := SmallBank new.
 	self assert: bank balance equals: 0.
 	bank deposit: 100.
 	self assert: bank balance equals: 100.
-	result := bank withdraw: 30.
-	self assert: result.
+	bank withdraw: 30.
 	self assert: bank balance equals: 70
 ]
